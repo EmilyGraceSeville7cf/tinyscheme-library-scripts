@@ -1,6 +1,6 @@
 # 📖 Description
 
-Create a glass effect with a shadow
+Create a glass effect with a shadow.
 
 ## 📷 Screenshots
 
