@@ -19,6 +19,18 @@
 	)
 )
 
+(define (utils-background-layer image)
+	(define layer (car (gimp-image-get-layer-by-name image "Background")))
+	
+	(cond
+		((= layer -1)
+			(gimp-message "Layer Background doesn't exist.")
+			#f)
+		(else
+			layer)
+	)
+)
+
 (define (utils-set-guides image percent)
 	(cond
 		((--utils-not-in-range? percent "The guideline padding in percent" 0 1) #f)
