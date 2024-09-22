@@ -1,0 +1,5 @@
+required-headings:
+  match_case: true
+  headings:
+    - "# 📖 Description"
+    - "## 📷 Screenshots"

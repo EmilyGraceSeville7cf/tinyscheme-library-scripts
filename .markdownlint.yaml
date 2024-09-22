@@ -1,0 +1,8 @@
+required-headings:
+  match_case: true
+  headings:
+    - "# 📖 Description"
+    - "## 💡 Requirements"
+    - "## 📗 Installation"
+    - "## 📕 Uninstallation"
+    - "## 🛠️ Configuration"
