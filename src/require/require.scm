@@ -25,6 +25,26 @@
 				(--require-error (string-append name " should be " type))
 				#t))))
 
+(define (--require-type-with-range
+	value name
+	type procedure
+	range-procedure from to)
+	
+	(cond
+		((not (procedure? range-procedure))
+			(--require-error "range-procedure should be a procedure"))
+		((not (number? from))
+			(--require-error "from should be a number"))
+		((not (number? to))
+			(--require-error "to should be a number"))
+		((> from to)
+			(--require-error "to should be less than to"))
+		((not (--require-type value name type procedure)) #f)
+		(else
+			(if (not (range-procedure value from to))
+				(--require-error (string-append name " should be in " (number->string from) ".." (number->string to) " range"))
+				#t))))
+
 (define (require-boolean value name)
 	(--require-type value name "boolean" boolean?))
 
@@ -39,4 +59,10 @@
 
 (define (require-list value name)
 	(--require-type value name "list" list?))
+
+(define (require-number-in value name from to)
+	(--require-type-with-range value name "number" number? (lambda (value) (and (>= value from) (<= value to))) from to))
+
+(define (require-string-in value name from to)
+	(--require-type-with-range value name "string" string? (lambda (value) (and (>= (string-length value) from) (<= (string-length value) to))) from to))
 

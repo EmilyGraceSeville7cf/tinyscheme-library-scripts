@@ -31,6 +31,18 @@ Functions:
   **description**: print error message if the input is not a list value  
   **inputs**: `value` (value), `name` (name)  
   **outputs**: `#f` | `#t`
+- `require-number-in`  
+  **description**: print error message if the input is not a number value with a
+  value inside from..to range  
+  **inputs**: `value` (value), `name` (name), `from` (minimum value), `to`
+  (maximum value)  
+  **outputs**: `#f` | `#t`
+- `require-string-in`  
+  **description**: print error message if the input is not a string value with a
+  length inside from..to range  
+  **inputs**: `value` (value), `name` (name), `from` (minimum length), `to`
+  (maximum length)  
+  **outputs**: `#f` | `#t`
 
 Variables:
 
@@ -38,5 +50,6 @@ Variables:
   **description**: if it's `TRUE` error messages are printed with `print`  
   **default**: `TRUE`
 - `require-print-error-to-console`  
-  **description**: if it's `TRUE` error messages are printed with `gimp-message`  
+  **description**: if it's `TRUE` error messages are printed with
+  `gimp-message`  
   **default**: `FALSE`
