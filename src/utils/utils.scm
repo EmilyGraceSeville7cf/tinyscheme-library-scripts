@@ -27,7 +27,7 @@
 	(define require-print-error-to-console FALSE)
 	
 	(cond
-		((not (require-number-in percent "The guideline padding in percent" 0 1)) #f)
+		((not (require-number-in percent "The guideline padding in percent" 0 0.5)) #f)
 		(else
 			(define image-width (car (gimp-image-width image)))
 			(define image-height (car (gimp-image-height image)))
