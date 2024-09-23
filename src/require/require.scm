@@ -1,10 +1,10 @@
-(define require-print-error-to-stdout TRUE)
-(define require-print-error-to-console FALSE)
+(define --require-print-error-to-stdout TRUE)
+(define --require-print-error-to-console FALSE)
 
 (define (--require-error message)
-	(if (equal? require-print-error-to-stdout TRUE)
+	(if (equal? --require-print-error-to-stdout TRUE)
 		(print message))
-	(if (equal? require-print-error-to-console TRUE)
+	(if (equal? --require-print-error-to-console TRUE)
 		(gimp-message message))
 	#f)
 
@@ -44,6 +44,27 @@
 			(if (not (range-procedure value from to))
 				(--require-error (string-append name " should be in " (number->string from) ".." (number->string to) " range"))
 				#t))))
+
+(define (require.config.set.print-error-to-stdout value)
+	(set! --require-print-error-to-stdout value)
+)
+
+(define (require.config.set.print-error-to-console value)
+	(set! --require-print-error-to-console value)
+)
+
+(define (require.config.get.print-error-to-stdout)
+	--require-print-error-to-stdout
+)
+
+(define (require.config.get.print-error-to-console)
+	--require-print-error-to-console
+)
+
+(define (require.config.reset)
+	(set! --require-print-error-to-stdout TRUE)
+	(set! --require-print-error-to-console FALSE)
+)
 
 (define (require-boolean value name)
 	(--require-type value name "boolean" boolean?))

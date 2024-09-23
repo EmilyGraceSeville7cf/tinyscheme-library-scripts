@@ -12,8 +12,6 @@ for the provided functionality.
 
 ## 📦 API
 
-Functions:
-
 - `require-boolean`  
   **description**: print error message if the input is not a boolean value  
   **inputs**: `value` (value), `name` (name)  
@@ -47,12 +45,23 @@ Functions:
   (maximum length)  
   **outputs**: `#f` | `#t`
 
-Variables:
+## 🛠️ Configuration
 
-- `require-print-error-to-stdout`  
-  **description**: if it's `TRUE` error messages are printed with `print`  
+- `require.config.set.print-error-to-stdout`  
+  **description**: if this setting is set to `TRUE` error messages are printed
+  with `print`  
+  **inputs**: `value` (value)  
   **default**: `TRUE`
-- `require-print-error-to-console`  
-  **description**: if it's `TRUE` error messages are printed with
-  `gimp-message`  
+- `require.config.set.print-error-to-console`  
+  **description**: if this setting is set to `TRUE` error messages are printed
+  with `gimp-message`  
+  **inputs**: `value` (value)  
   **default**: `FALSE`
+- `require.config.get.print-error-to-stdout`  
+  **description**: get whether error messages are printed with `print`  
+  **outputs**: setting value  
+- `require.config.get.print-error-to-console`  
+  **description**: get whether error messages are printed with `gimp-message`  
+  **outputs**: setting value  
+- `require.config.reset`  
+  **description**: reset config to defaults where just `print` is used  
