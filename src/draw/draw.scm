@@ -27,6 +27,7 @@
 			(gimp-context-set-background fill-color)
 			(gimp-drawable-edit-fill layer FILL-BACKGROUND)
 			(gimp-context-pop)
+			#t
 		)
 	)
 )
@@ -51,6 +52,7 @@
 			(gimp-context-set-background fill-color)
 			(gimp-drawable-edit-fill layer FILL-BACKGROUND)
 			(gimp-context-pop)
+			#t
 		)
 	)
 )
