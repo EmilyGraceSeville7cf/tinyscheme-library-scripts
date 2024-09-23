@@ -23,8 +23,8 @@
 )
 
 (define (utils-set-guides image percent)
-	(define require-print-error-to-stdout TRUE)
-	(define require-print-error-to-console FALSE)
+    (require.config.set.print-error-to-stdout TRUE)
+    (require.config.set.print-error-to-stdout FALSE)
 	
 	(cond
 		((not (require-number-in percent "The guideline padding in percent" 0 0.5)) #f)
@@ -36,6 +36,7 @@
 			(gimp-image-add-hguide image (* image-height (- 1 percent)))
 			(gimp-image-add-vguide image (* image-width percent))
 			(gimp-image-add-vguide image (* image-width (- 1 percent)))
+			(require.config.reset)
 			#t
 		)
 	)

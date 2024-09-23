@@ -7,6 +7,9 @@
     glass-blur-radius shadow-blur-radius
     shadow-color)
     
+    (require.config.set.print-error-to-stdout FALSE)
+    (require.config.set.print-error-to-console TRUE)
+
     (cond
     	((not (require-number-in from-x-in-percent "An initial X position" 0 to-x-in-percent)) #f)
     	((not (require-number-in from-y-in-percent "An initial Y position" 0 to-y-in-percent)) #f)
@@ -63,6 +66,7 @@
 
                     (gimp-image-undo-group-end image)
                     (gimp-context-pop)
+                    (require.config.reset)
                     #t
                 )
             )

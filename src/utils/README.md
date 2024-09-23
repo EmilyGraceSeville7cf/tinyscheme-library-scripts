@@ -21,3 +21,8 @@ for the provided functionality.
   **description**: set image guides around its center  
   **inputs**:`image` (image ID), `percent` (padding in percent)  
   **outputs**: `#f` | `#t`
+
+## 🛠️ Configuration
+
+Configuration is unavailable for this type of script. Consult it's
+[source code](./script-fu-card.scm) for the provided functionality.

@@ -23,3 +23,8 @@ for the provided functionality.
   (X coordinate of the bottom-right corner), `to-y` (Y coordinate of the
   bottom-right corner), `fill-color` (fill color)  
   **outputs**: `#f` | `#t`
+
+## 🛠️ Configuration
+
+Configuration is unavailable for this type of script. Consult it's
+[source code](./script-fu-card.scm) for the provided functionality.
