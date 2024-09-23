@@ -42,6 +42,7 @@
 			(gimp-image-add-hguide image (* image-width (- 1 percent)))
 			(gimp-image-add-vguide image (* image-height percent))
 			(gimp-image-add-vguide image (* image-height (- 1 percent)))
+			#t
 		)
 	)
 )
