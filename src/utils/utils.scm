@@ -1,12 +1,3 @@
-(define (--utils-not-in-range? value description from to)
-    (cond
-        ((or (< value from) (> value to))
-            (gimp-message (string-append description " is not in range " (number->string from) ".." (number->string to)))
-            #t)
-        (else #f)
-    )
-)
-
 (define (utils-first-image)
 	(define images (gimp-image-list))
 	
@@ -32,16 +23,19 @@
 )
 
 (define (utils-set-guides image percent)
+	(define require-print-error-to-stdout TRUE)
+	(define require-print-error-to-console FALSE)
+	
 	(cond
-		((--utils-not-in-range? percent "The guideline padding in percent" 0 1) #f)
+		((not (require-number-in percent "The guideline padding in percent" 0 1)) #f)
 		(else
 			(define image-width (car (gimp-image-width image)))
 			(define image-height (car (gimp-image-height image)))
-
-			(gimp-image-add-hguide image (* image-width percent))
-			(gimp-image-add-hguide image (* image-width (- 1 percent)))
-			(gimp-image-add-vguide image (* image-height percent))
-			(gimp-image-add-vguide image (* image-height (- 1 percent)))
+			
+			(gimp-image-add-hguide image (* image-height percent))
+			(gimp-image-add-hguide image (* image-height (- 1 percent)))
+			(gimp-image-add-vguide image (* image-width percent))
+			(gimp-image-add-vguide image (* image-width (- 1 percent)))
 			#t
 		)
 	)

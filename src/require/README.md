@@ -1,5 +1,8 @@
 # 📖 Description
 
+> ❗ This script is required by another scripts, make sure it's installed to
+> make sure that other scripts function correctly.
+
 Provide utils for type checking in scripts.
 
 ## 📷 Screenshots

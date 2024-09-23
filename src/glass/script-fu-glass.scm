@@ -1,12 +1,3 @@
-(define (--script-fu-glass-not-in-range? value description from to)
-    (cond
-        ((or (< value from) (> value to))
-            (gimp-message (string-append description " is not in range " (number->string from) ".." (number->string to)))
-            #t)
-        (else #f)
-    )
-)
-
 (define (script-fu-glass
     image
     enable-shadow enable-pixelize
@@ -17,8 +8,8 @@
     shadow-color)
     
     (cond
-    	((--script-fu-glass-not-in-range? from-x-in-percent "An initial X position" 0 to-x-in-percent) #f)
-    	((--script-fu-glass-not-in-range? from-y-in-percent "An initial Y position" 0 to-y-in-percent) #f)
+    	((not (require-number-in from-x-in-percent "An initial X position" 0 to-x-in-percent)) #f)
+    	((not (require-number-in from-y-in-percent "An initial Y position" 0 to-y-in-percent)) #f)
         (else
             (define from-x-in-percent (/ from-x-in-percent 100))
             (define from-y-in-percent (/ from-y-in-percent 100))
