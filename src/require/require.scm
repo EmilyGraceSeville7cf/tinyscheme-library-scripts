@@ -103,3 +103,30 @@
 (define (require-string-in value name from to)
 	(--require-type-with-range value name "string" string? (lambda (value) (and (>= (string-length value) from) (<= (string-length value) to))) from to))
 
+(define (!b value name)
+	(require-boolean value name))
+
+(define (!n value name)
+	(require-number value name))
+
+(define (!c value name)
+	(require-char value name))
+
+(define (!s value name)
+	(require-string value name))
+
+(define (!l value name)
+	(require-string value name))
+
+(define (+stdout)
+	(require.config.set.print-error-to-stdout TRUE))
+
+(define (-stdout)
+	(require.config.set.print-error-to-stdout FALSE))
+
+(define (+console)
+	(require.config.set.print-error-to-console TRUE))
+
+(define (-console)
+	(require.config.set.print-error-to-console FALSE))
+
