@@ -67,6 +67,7 @@
                     (gimp-image-undo-group-end image)
                     (gimp-context-pop)
                     (require.config.reset)
+                    (gimp-displays-flush)
                     #t
                 )
             )
