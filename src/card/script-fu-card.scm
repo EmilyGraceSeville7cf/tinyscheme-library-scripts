@@ -1,5 +1,6 @@
 (define (script-fu-card
     image
+    card-size
     card-description
     text-box-height
     card-background-color
@@ -7,8 +8,8 @@
     card-enable-image-blur card-enable-image-round card-enable-text-box-blur
     card-image-effect)
     
-    (define image-width (car (gimp-image-width image)))
-    (define image-height (car (gimp-image-height image)))
+	(define image-width (car (gimp-image-width image)))
+	(define image-height (car (gimp-image-height image)))
     (define layer-count (car (gimp-image-get-layers image)))
     (define layer (car (gimp-image-get-layer-by-name image "Picture")))
     
@@ -31,10 +32,15 @@
     		(gimp-message "The card background should be different from the text color")
     		#f)
     	(else
-    		; Resize image
-    		(gimp-context-push)
-    		(gimp-image-undo-group-start image)
-    		
+			(gimp-context-push)
+			(gimp-image-undo-group-start image)
+			
+    		; Scale image
+    		(gimp-image-scale image card-size card-size)
+			(define image-width (car (gimp-image-width image)))
+			(define image-height (car (gimp-image-height image)))
+
+    		; Resize image    		
     		(define image-size image-width)
     		
     		(define text-box-height-as-float (/ text-box-height 100))
@@ -100,6 +106,7 @@
             
     		(gimp-image-undo-group-end image)
     		(gimp-context-pop)
+    		(gimp-displays-flush)
     		#t
     	)
     )
@@ -114,6 +121,7 @@
     "September 22, 2024"
     ""
     SF-IMAGE "" 1
+    SF-ADJUSTMENT "A card size in pixels" '(300 300 600 1 10 0 SF-SPINNER)
     SF-STRING "A card description" "Description"
     SF-ADJUSTMENT "A text box height in percent" '(25 25 100 1 10 0 SF-SPINNER)
     SF-COLOR "A card background color" '(255 255 255)
