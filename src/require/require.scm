@@ -45,12 +45,28 @@
 				(--require-error (string-append name " should be in " (number->string from) ".." (number->string to) " range"))
 				#t))))
 
+(define (--require-boolean-constant value)
+	(cond
+		((not (or (equal? value 0) (equal? value 1)))
+			(--require-error "value should be either TRUE or FALSE")
+			#f)
+		(else #t))
+)
+
 (define (require.config.set.print-error-to-stdout value)
-	(set! --require-print-error-to-stdout value)
+	(cond
+		((not (--require-boolean-constant value)) #f)
+		(else
+			(set! --require-print-error-to-stdout value)
+			#t))
 )
 
 (define (require.config.set.print-error-to-console value)
-	(set! --require-print-error-to-console value)
+	(cond
+		((not (--require-boolean-constant value)) #f)
+		(else
+			(set! --require-print-error-to-console value)
+			#t))
 )
 
 (define (require.config.get.print-error-to-stdout)
