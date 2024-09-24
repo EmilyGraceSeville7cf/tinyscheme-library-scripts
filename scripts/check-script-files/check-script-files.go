@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path"
 
 	"github.com/fatih/color"
 )
@@ -18,11 +19,14 @@ func PrintMessage(text string) {
 }
 
 func main() {
-	directories, err := os.ReadDir("../../src")
+	srcPath := path.Join("..", "..", "src")
+	directories, err := os.ReadDir(srcPath)
 	if err != nil {
 		PrintError(err.Error())
 		os.Exit(1)
 	}
+
+	status := 0
 
 	for _, directory := range directories {
 		if !directory.IsDir() && directory.Name() == ".markdownlint.yaml" {
@@ -30,14 +34,17 @@ func main() {
 		}
 
 		if !directory.IsDir() {
-			PrintError(fmt.Sprintf("%s is not a directory", directory.Name()))
-			os.Exit(1)
+			PrintError(fmt.Sprintf("%s is not a directory in %s", directory.Name(), srcPath))
+			status = 1
+			continue
 		}
 
-		files, err := os.ReadDir(fmt.Sprintf("../../src/%s", directory.Name()))
+		scriptPath := path.Join(srcPath, directory.Name())
+		files, err := os.ReadDir(scriptPath)
 		if err != nil {
 			PrintError(err.Error())
-			os.Exit(1)
+			status = 1
+			continue
 		}
 
 		seenUIScreenshot, seenResultScreenshot := false, false
@@ -52,16 +59,20 @@ func main() {
 			}
 
 			if file.IsDir() {
-				PrintError(fmt.Sprintf("%s is a directory", file.Name()))
-				os.Exit(1)
+				PrintError(fmt.Sprintf("%s is a directory in %s", file.Name(), scriptPath))
+				status = 1
+				continue
 			}
 
 			if seenUIScreenshot != seenResultScreenshot {
-				PrintError("both ui.png and result.png should present in case one of them exists")
-				os.Exit(1)
+				PrintError(fmt.Sprintf("both ui.png and result.png should present in case one of them exists in %s", scriptPath))
+				status = 1
+				continue
 			}
 		}
 
 		PrintMessage(fmt.Sprintf("%s is valid", directory.Name()))
 	}
+
+	os.Exit(status)
 }
